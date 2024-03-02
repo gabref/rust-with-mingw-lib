@@ -1,0 +1,1 @@
+# rust-with-mingw-lib
