@@ -3,7 +3,7 @@
 # it only works on mingw
 main:
 	@echo "Compiling main"
-	x86_64-w64-mingw32-g++ -o main.exe src/main.c -fpermissive -Iinclude -Llibs -static -Wl,--start-group -lMyLib -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -lwsock32 -lsetupapi -Wl,--end-group
+	x86_64-w64-mingw32-g++ -o main.exe src/main.c -fpermissive -Iinclude -Llibs/x64 -static -Wl,--start-group -lMyLib -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -lwsock32 -lsetupapi -Wl,--end-group
 
 # compile main with my test library
 main_test: mylib_test
@@ -13,7 +13,7 @@ main_test: mylib_test
 # compile my test library
 mylib_test: clean
 	@echo "Compiling MyLibTest"
-	x86_64-w64-mingw32-gcc -o libMyLibTest.o -c src/MyLibTest.c -Iinclude
+	gcc -o libMyLibTest.o -c src/MyLibTest.c -Iinclude
 	ar rcs libMyLibTest.a libMyLibTest.o
 	mv libMyLibTest.a libs
 
@@ -23,7 +23,7 @@ test_rust_dll:
 	cargo build
 	mv target/debug/rust_with_mingw_lib.dll librust_with_mingw_lib.dll
 	@echo "Compiling with Rust DLL"
-	x86_64-w64-mingw32-gcc -o test.exe src/test_dll.c -L. -lrust_with_mingw_lib
+	gcc -o test.exe src/test_dll.c -L. -lrust_with_mingw_lib
 	# LD_LIBRARY_PATH=target/debug ./test.exe
 
 clean: 
