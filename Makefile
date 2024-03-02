@@ -27,6 +27,6 @@ test_rust_dll:
 	# LD_LIBRARY_PATH=target/debug ./test.exe
 
 clean: 
-	rm -f main.exe test.exe libMyLibTest.a libMyLibTest.o
+	rm -f main.exe test.exe libs/libMyLibTest.a libMyLibTest.o
 
 PHONY: compile_main clean

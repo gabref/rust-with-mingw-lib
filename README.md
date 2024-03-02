@@ -39,7 +39,7 @@ cargo build
 and then in the target/debug directory we will have our .so. To test it, just do:
 ```
 mv target/debug/librust_with_mingw_lib.so .
-cc -o test src/test_dll.c -L. -rust_with_mingw_lib
+cc -o test src/test_dll.c -L. -lrust_with_mingw_lib
 LD_LIBRARY_PATH=. ./test
 ```
 everything seems to be working.
@@ -55,6 +55,8 @@ First, uncomment the section in the build.rs `link to actual library` and commen
 ```
 cargo build
 ```
+
+`and we are even configuring the cpp linker in .cargo/config.toml`
 
 ## What are we trying to solve?
 1. Compile the Rust DLL for win_x86 and win_x64 linking to the cpp static library libMyLib.a.
